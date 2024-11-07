@@ -1,11 +1,13 @@
 import pandas as pd
 
+# Input the state abreviation
 def extract_state_data(state, dataframe):
 
     df = dataframe[dataframe['State'] == state]
 
     return df
 
+# Input the dates as a string DO NOT USE SUPER COVID.
 def select_dates(dataframe, start, end):
 
     columnlist = ['countyFIPS', 'County Name', 'State', 'StateFIPS']
@@ -30,6 +32,7 @@ def select_dates(dataframe, start, end):
 
     return df
 
+# This function returns a dataframe that only contains the day to day change in cases/deaths instead of the total.
 def correct_numbers(dataframe):
     df = dataframe.copy()
     columnlist = ['countyFIPS', 'County Name', 'State', 'StateFIPS']
@@ -49,10 +52,11 @@ def correct_numbers(dataframe):
 
     return df
 
-def top_5(dataframe):
+# Returns a dataframe containing the 5 largest values in that column
+def top_5(dataframe, column):
 
     df = dataframe.copy()
 
-    df = df.sort_values(by='2021-01-03', ascending=False)
+    df = df.sort_values(by=column, ascending=False)
 
     return df.head(5)
