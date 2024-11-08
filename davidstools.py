@@ -60,3 +60,15 @@ def top_5(dataframe, column):
     df = df.sort_values(by=column, ascending=False)
 
     return df.head(5)
+
+def normalize_pop(data, population, normfactor):
+    df = data.merge(population, how='left', on='countyFIPS', suffixes=('','_delete'))
+    df = df.drop(columns = ['County Name_delete', 'State_delete'])
+    columnlist = ['countyFIPS', 'County Name', 'State', 'StateFIPS']
+    dates = df.drop(columns=columnlist, inplace=False)
+    for date in dates:
+        df[date] = df[date] / (df['population'] / normfactor)
+    df.drop(columns='population', inplace=True)
+
+    return df
+
