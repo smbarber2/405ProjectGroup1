@@ -50,4 +50,4 @@ def national_yearly_data(frame):
 # data in the same format as national_yearly_data but for a single state.
 def state_data(state, frame):
     state = frame[frame['State'] == state]
-    return national_yearly_data(state)
+    return national_data(state)
